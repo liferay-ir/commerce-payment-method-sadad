@@ -3,6 +3,7 @@ dependencies {
 	compileInclude group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.9.8"
 	compileInclude group: "com.fasterxml.jackson.datatype", name: "jackson-datatype-jsr310", version: "2.9.8"
 	compileInclude group: "com.worldline.sips", name: "payment-sdk-common", version: "1.0.1"
+	compileInclude group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.60'
 
 	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.1.0"
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib", version: "3.0.0"

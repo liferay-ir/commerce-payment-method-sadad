@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
+import ir.sain.commerce.payment.method.sadad.configuration.SadadGroupServiceConfiguration;
 import ir.sain.commerce.payment.method.sadad.constants.SadadCommercePaymentMethodConstants;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -106,7 +107,7 @@ public class SadadServlet extends HttpServlet {
                     _commerceOrderLocalService.getCommerceOrderByUuidAndGroupId(
                             uuid, groupId);
 
-            IKGroupServiceConfiguration ikGroupServiceConfiguration =
+            SadadGroupServiceConfiguration sadadGroupServiceConfiguration =
                     _getConfiguration(commerceOrder.getGroupId());
 
             StringBuilder transactionReference = new StringBuilder();
@@ -116,13 +117,15 @@ public class SadadServlet extends HttpServlet {
 
             if (resultCode.equals("100")) {
 //                verify payment
-                Verify verify = new Verify();
-                verify.getBasicHttpBindingIVerify();
-                IVerify iVerify = verify.getBasicHttpBindingIVerify();
-                Long aLong = iVerify.kicccPaymentsVerification(token, ikGroupServiceConfiguration.merchantId(),
-                        referenceId, "");
+//                Verify verify = new Verify();
+//                verify.getBasicHttpBindingIVerify();
+//                IVerify iVerify = verify.getBasicHttpBindingIVerify();
+//                Long aLong = iVerify.kicccPaymentsVerification(token, sadadGroupServiceConfiguration.merchantId(),
+//                        referenceId, "");
 
-                if (aLong.intValue() > 0) {
+//                if (aLong.intValue() > 0) {
+                // Todo
+                if (true) {
                     _commercePaymentEngine.completePayment(
                             commerceOrder.getCommerceOrderId(),
                             transactionReference.toString(), httpServletRequest);
@@ -144,13 +147,13 @@ public class SadadServlet extends HttpServlet {
         }
     }
 
-    private IKGroupServiceConfiguration _getConfiguration(long groupId)
+    private SadadGroupServiceConfiguration _getConfiguration(long groupId)
             throws ConfigurationException {
 
         return _configurationProvider.getConfiguration(
-                IKGroupServiceConfiguration.class,
+                SadadGroupServiceConfiguration.class,
                 new GroupServiceSettingsLocator(
-                        groupId, IKCommercePaymentMethodConstants.SERVICE_NAME));
+                        groupId, SadadCommercePaymentMethodConstants.SERVICE_NAME));
     }
 
     @Reference
@@ -166,7 +169,7 @@ public class SadadServlet extends HttpServlet {
     private Portal _portal;
 
     @Reference(
-            target = "(osgi.web.symbolicname=com.sain.commerce.payment.method.irankish)"
+            target = "(osgi.web.symbolicname=ir.sain.commerce.payment.method.sadad)"
     )
     private ServletContext _servletContext;
 
