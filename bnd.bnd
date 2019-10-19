@@ -1,4 +1,4 @@
 Bundle-Name: commerce-payment-method-sadad
 Bundle-SymbolicName: ir.sain.commerce.payment.method.sadad
 Bundle-Version: 1.0.0
-Export-Package: ir.sain.commerce.payment.method.sadad.api
+Web-ContextPath: /commerce-payment-method-sadad

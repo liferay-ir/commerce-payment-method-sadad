@@ -22,7 +22,7 @@
 	SadadGroupServiceConfiguration sadadGroupServiceConfiguration = (SadadGroupServiceConfiguration)request.getAttribute(SadadGroupServiceConfiguration.class.getName());
 %>
 
-<portlet:actionURL name="editIKCommercePaymentMethodConfigurationMVCActionCommand" var="editCommercePaymentMethodActionURL" />
+<portlet:actionURL name="editSadadCommercePaymentMethodConfigurationMVCActionCommand" var="editCommercePaymentMethodActionURL" />
 
 <aui:form action="<%= editCommercePaymentMethodActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
@@ -33,8 +33,16 @@
 	</div>
 
 	<aui:fieldset-group markupView="lexicon">
-		<aui:fieldset label="authentication">
+		<aui:fieldset label="merchant-id">
 			<aui:input label="merchant-id" name="settings--merchantId--" value="<%= sadadGroupServiceConfiguration.merchantId() %>" />
+		</aui:fieldset>
+
+        <aui:fieldset label="merchant-key">
+			<aui:input label="merchant-key" name="settings--merchantKey--" value="<%= sadadGroupServiceConfiguration.merchantKey() %>" />
+		</aui:fieldset>
+
+        <aui:fieldset label="terminal-id">
+			<aui:input label="terminal-id" name="settings--terminalId--" value="<%= sadadGroupServiceConfiguration.terminalId() %>" />
 		</aui:fieldset>
 	</aui:fieldset-group>
 

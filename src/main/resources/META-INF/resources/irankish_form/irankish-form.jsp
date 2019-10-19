@@ -20,11 +20,13 @@
 String redirectUrl = (String)request.getAttribute("redirectUrl");
 String merchantId = (String)request.getAttribute("merchantId");
 String token = (String)request.getAttribute("token");
+
+    System.out.println("token JSP = " + token);
 %>
 
-<form action="<%= redirectUrl %>" id="formMercanet" method="post" name="formMercanet" style="display: none">
-	<input id="<portlet:namespace />merchantId" name="merchantId" type="hidden" value="<%= merchantId %>">
-	<input id="<portlet:namespace />token" name="token" type="hidden" value="<%= token %>">
+<form action="<%= redirectUrl %>" id="formMercanet" method="GET" name="formMercanet" style="display: none">
+	<%--<input id="<portlet:namespace />merchantId" name="merchantId" type="hidden" value="<%= merchantId %>">--%>
+	<input id="<portlet:namespace />token" name="Token" type="hidden" value="<%= token %>">
 </form>
 
 <script>

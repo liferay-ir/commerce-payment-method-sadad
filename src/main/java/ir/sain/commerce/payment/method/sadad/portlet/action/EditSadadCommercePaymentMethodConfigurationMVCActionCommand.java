@@ -75,9 +75,13 @@ public class EditSadadCommercePaymentMethodConfigurationMVCActionCommand
 		String merchantId = ParamUtil.getString(
 			actionRequest, "settings--merchantId--");
 		String merchantKey = ParamUtil.getString(
-			actionRequest, "settings--merchantkey--");
+			actionRequest, "settings--merchantKey--");
 		String terminalId = ParamUtil.getString(
 			actionRequest, "settings--terminalId--");
+
+        System.out.println("terminalId = " + terminalId);
+        System.out.println("merchantKey = " + merchantKey);
+        System.out.println("merchantId = " + merchantId);
 
 
 		modifiableSettings.setValue("merchantId", merchantId);

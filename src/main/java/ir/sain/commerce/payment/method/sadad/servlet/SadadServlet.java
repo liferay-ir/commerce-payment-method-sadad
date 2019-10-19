@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import ir.sain.commerce.payment.method.sadad.configuration.SadadGroupServiceConfiguration;
 import ir.sain.commerce.payment.method.sadad.constants.SadadCommercePaymentMethodConstants;
+import ir.sain.commerce.payment.method.sadad.util.SadadWebserviceHelper;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -95,13 +96,18 @@ public class SadadServlet extends HttpServlet {
         try {
             long groupId = ParamUtil.getLong(httpServletRequest, "groupId");
             String uuid = ParamUtil.getString(httpServletRequest, "uuid");
-            String referenceId = ParamUtil.getString(
-                    httpServletRequest, "referenceId");
+            String resOrderId = ParamUtil.getString(
+                    httpServletRequest, "OrderId");
             String resultCode = ParamUtil.getString(
-                    httpServletRequest, "resultCode");
+                    httpServletRequest, "ResCode");
             String token = ParamUtil.getString(httpServletRequest, "token");
+            System.out.println("token Back ---------- = " + token);
+            System.out.println("resultCode  Back ---------- = " + resultCode);
+            System.out.println("resOrderId  Back ---------- = " + resOrderId);
             String redirect = ParamUtil.getString(
                     httpServletRequest, "redirect");
+
+            System.out.println("redirect = " + redirect);
 
             CommerceOrder commerceOrder =
                     _commerceOrderLocalService.getCommerceOrderByUuidAndGroupId(
@@ -115,17 +121,17 @@ public class SadadServlet extends HttpServlet {
             transactionReference.append(commerceOrder.getGroupId());
             transactionReference.append(commerceOrder.getCommerceOrderId());
 
-            if (resultCode.equals("100")) {
-//                verify payment
-//                Verify verify = new Verify();
-//                verify.getBasicHttpBindingIVerify();
-//                IVerify iVerify = verify.getBasicHttpBindingIVerify();
-//                Long aLong = iVerify.kicccPaymentsVerification(token, sadadGroupServiceConfiguration.merchantId(),
-//                        referenceId, "");
+            if (resultCode.equals("0")) {
 
-//                if (aLong.intValue() > 0) {
-                // Todo
-                if (true) {
+                String[] responseVerifyArray = SadadWebserviceHelper.melliVerify(token, sadadGroupServiceConfiguration.merchantKey());
+                String verifyResultCode = responseVerifyArray[0];
+                boolean verifySuccess = resultCode.equals("0");
+
+                System.out.println("verifyResultCode = " + verifyResultCode);
+                System.out.println("verifySuccess = " + verifySuccess);
+
+
+                if (verifySuccess) {
                     _commercePaymentEngine.completePayment(
                             commerceOrder.getCommerceOrderId(),
                             transactionReference.toString(), httpServletRequest);
