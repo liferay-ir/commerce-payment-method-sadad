@@ -25,7 +25,7 @@ public class SadadWebserviceHelper {
     public static String getMelliTokenURL()
             throws SystemException, PortalException {
 //        return PortletPropsValues.MELLI_EPAYMENT_WEB_SERVICE_TOKEN_URL;
-        return "https://sadad.shaparak.ir/vpg/api/v0/Request/PaymentRequest";
+        return "https://sadad.shaparak.ir/api/v0/PaymentByIdentity/PaymentRequest";
     }
 
     public static String getMelliGetURL()
@@ -40,7 +40,7 @@ public class SadadWebserviceHelper {
         return "https://sadad.shaparak.ir/vpg/api/v0/Advice/Verify";
     }
 
-    public static String[] getMelliToken(String invoiceNumber, String revertURL, String terminalId, String merchantId,String merchantKey, long amount)
+    public static String[] getMelliToken(String invoiceNumber, String revertURL, String terminalId, String merchantId,String publicKey,String merchantKey, long amount)
             throws Exception {
 
         String[] results = new String[2];
@@ -53,6 +53,7 @@ public class SadadWebserviceHelper {
             data.put("SignData", signedData);
             data.put("ReturnUrl", revertURL);
             data.put("OrderId", invoiceNumber);
+            data.put("PaymentIdentity", publicKey);
             String date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ").format(new Date());
             String tail = date.substring(date.indexOf("+") + 1);
             tail = tail.substring(0, 2) + ":" + tail.substring(2);

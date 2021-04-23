@@ -39,4 +39,7 @@ public interface SadadGroupServiceConfiguration {
 	@Meta.AD(name = "terminal-id", required = false)
 	public String terminalId();
 
+	@Meta.AD(name = "public-key", required = false)
+	public String publicKey();
+
 }

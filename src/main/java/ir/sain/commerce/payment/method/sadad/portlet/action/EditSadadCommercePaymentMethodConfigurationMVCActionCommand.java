@@ -78,6 +78,8 @@ public class EditSadadCommercePaymentMethodConfigurationMVCActionCommand
 			actionRequest, "settings--merchantKey--");
 		String terminalId = ParamUtil.getString(
 			actionRequest, "settings--terminalId--");
+		String publicKey = ParamUtil.getString(
+			actionRequest, "settings--publicKey--");
 
         System.out.println("terminalId = " + terminalId);
         System.out.println("merchantKey = " + merchantKey);
@@ -87,6 +89,7 @@ public class EditSadadCommercePaymentMethodConfigurationMVCActionCommand
 		modifiableSettings.setValue("merchantId", merchantId);
 		modifiableSettings.setValue("merchantKey", merchantKey);
 		modifiableSettings.setValue("terminalId", terminalId);
+		modifiableSettings.setValue("publicKey", publicKey);
 		modifiableSettings.store();
 	}
 

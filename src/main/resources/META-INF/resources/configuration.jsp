@@ -44,6 +44,10 @@
         <aui:fieldset label="terminal-id">
 			<aui:input label="terminal-id" name="settings--terminalId--" value="<%= sadadGroupServiceConfiguration.terminalId() %>" />
 		</aui:fieldset>
+
+		<aui:fieldset label="public-key">
+			<aui:input label="public-key" name="settings--publicKey--" value="<%= sadadGroupServiceConfiguration.publicKey() %>" />
+		</aui:fieldset>
 	</aui:fieldset-group>
 
 	<aui:button-row>

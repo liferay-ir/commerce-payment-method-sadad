@@ -149,7 +149,7 @@ public class SadadCommercePaymentMethod implements CommercePaymentMethod {
 				commerceCurrency.getMaxFractionDigits(),
 				RoundingMode.valueOf(roundingMode));
 
-        System.out.println("total = " + total);
+        System.out.println("**656589*** total = " + total);
 
 
         StringBuilder transactionReference = new StringBuilder();
@@ -192,7 +192,9 @@ public class SadadCommercePaymentMethod implements CommercePaymentMethod {
         System.out.println("total.longValue() = " + total.longValue());
         System.out.println("automaticUrl.toString() = " + automaticUrl.toString());
         String[] tokenArray = SadadWebserviceHelper.getMelliToken(String.valueOf(SadadCommercePaymentRequest.getCommerceOrderId()),automaticUrl.toString(),
-        sadadGroupServiceConfiguration.terminalId(),sadadGroupServiceConfiguration.merchantId(),sadadGroupServiceConfiguration.merchantKey(),total.longValue());
+        sadadGroupServiceConfiguration.terminalId(),sadadGroupServiceConfiguration.merchantId(),
+				sadadGroupServiceConfiguration.publicKey(),sadadGroupServiceConfiguration.merchantKey(),
+				total.longValue());
         for (int i = 0; i < tokenArray.length; i++) {
             String s = tokenArray[i];
             System.out.println("s = " + s);
